@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   imports: [],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss',
+  templateUrl: './dashboard.html'
 })
 export class Dashboard {
   constructor(private readonly conocerGeneralService: ConocerGeneralService, private readonly router: Router) {}

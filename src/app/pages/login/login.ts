@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  templateUrl: './login.html'
 })
 export class Login {
 

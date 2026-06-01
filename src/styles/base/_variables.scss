@@ -1,3 +1,7 @@
+// Colores
+$color_white: var(--color_white);
+$color_black: var(--color_black);
+
 // Espaciado
 $spacing_3xs: var(--spacing_3xs);
 $spacing_2xs: var(--spacing_2xs);
@@ -32,5 +36,87 @@ $breakpoints: (
   desktop: 1025px,
 );
 
+$font-family: 'Noto Sans';
+
 $typography: (   
+  H: (
+    size: 24px,
+    weight: 800,
+    line-height: 24px,
+  ),
+  extrabold_b1: (
+    size: 16px,
+    weight: 800,
+    line-height: 16px,
+  ),
+  bold_b1: (
+    size: 16px,
+    weight: 700,
+    line-height: 16px,
+  ),
+  semibold_b1: (
+    size: 16px,
+    weight: 600,
+    line-height: 16px,
+  ),
+  medium_b1: (
+    size: 16px,
+    weight: 500,
+    line-height: 16px,
+  ),
+  regular_b1: (
+    size: 16px,
+    weight: 400,
+    line-height: 16px,
+  ),
+  extrabold_b0: (
+    size: 14px,
+    weight: 800,
+    line-height: 14px,
+  ),
+  bold_b0: (
+    size: 14px,
+    weight: 700,
+    line-height: 14px,
+  ),
+  semibold_b0: (
+    size: 14px,
+    weight: 600,
+    line-height: 14px,
+  ),
+  medium_b0: (
+    size: 14px,
+    weight: 500,
+    line-height: 14px,
+  ),
+  regular_b0: (
+    size: 14px,
+    weight: 400,
+    line-height: 14px,
+  ),
+  extrabold_SD: (
+    size: 10px,
+    weight: 800,
+    line-height: 10px,
+  ),
+  bold_SD: (
+    size: 10px,
+    weight: 700,
+    line-height: 10px,
+  ),
+  semibold_SD: (
+    size: 10px,
+    weight: 600,
+    line-height: 10px,
+  ),
+  medium_SD: (
+    size: 10px,
+    weight: 500,
+    line-height: 10px,
+  ),
+  regular_SD: (
+    size: 10px,
+    weight: 400,
+    line-height: 10px,
+  ),
 ); 

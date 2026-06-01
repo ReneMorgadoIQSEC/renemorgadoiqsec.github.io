@@ -1,5 +1,9 @@
 :root {
 
+    /* Colores */
+    --color_white: #FFFFFF;
+    --color_black: #222222;
+
     /* Espaciado */
     --spacing_3xs: 4px;
     --spacing_2xs: 8px;
@@ -29,7 +33,10 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-
+        /* Colores */
+        --color_white: #000000;
+        --color_black: #FFFFFF;
+        
         /* Espaciado */
         --spacing_3xs: 4px;
         --spacing_2xs: 8px;

@@ -25,7 +25,6 @@
 		font-size: map-get($values, size);
 		font-weight: map-get($values, weight);
 		line-height: map-get($values, line-height);
-		font-family: map-get($values, font-family);
 	}
 
 	@else {
