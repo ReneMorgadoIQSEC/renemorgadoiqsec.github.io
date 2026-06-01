@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+// Base
+@import './styles/base/root.scss';
+@import './styles/base/variables.scss';
+@import './styles/base/mixins.scss';
+@import './styles/base/fonts.scss';
+@import './styles/base/reset.scss';
+
+// Components
+@import './styles/components/buttons.scss';
