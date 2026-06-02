@@ -1,1 +1,6 @@
 <button (click)="onButtonClick()">Logout</button>
+<app-pager
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="onPageChange($event)">
+</app-pager>
