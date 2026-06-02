@@ -4,7 +4,25 @@
         <p class="FilterForm__title-text">Filtros</p>
     </div>
     <div class="FilterForm__inputs">
-
+        <app-input
+        formControlName="search"
+        variant="filter"
+        type="text"
+        placeholder="Buscar por nombre, CURP, correo electrónico"
+        icon="assets/find.svg">
+        </app-input>
+        <app-input
+        formControlName="dateStart"
+        variant="filter"
+        type="date"
+        placeholder="Fecha inicio">
+        </app-input>
+        <app-input
+        formControlName="dateEnd"
+        variant="filter"
+        type="date"
+        placeholder="Fecha fin">
+        </app-input>
     </div>
     <div class="FilterForm__buttons">
         <button [disabled]="!allowButtonSearch()" type="submit" class="button button--primary">Buscar</button>

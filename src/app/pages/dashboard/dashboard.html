@@ -3,5 +3,7 @@
     <section class="Dashboard__content">
         <app-title-export [data]="tableData"></app-title-export>
         <app-filter-form (onFilterSearch)="onFilterSearch($event)"></app-filter-form>
+        <app-table [data]="tableData" [alreadySearched]="alreadySearched" (onDataSelected)="onDataSelected($event)" (searchAllData)="onSearchAllData()"></app-table>
+        <app-user-detail [showModal]="showModal" (onCloseModal)="closeModal()" [userSelected]="dataSelected"></app-user-detail>
     </section>
 </main>

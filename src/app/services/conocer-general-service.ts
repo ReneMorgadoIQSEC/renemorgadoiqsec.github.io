@@ -1,4 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { GetTokenResponse } from '../interfaces/Iauth';
 import { TableData } from '../interfaces/ITable';
 
@@ -36,29 +37,56 @@ export class ConocerGeneralService {
     }
   }
 
-  getTableData(): TableData[] {
-    return [
+  getTableData(): Observable<TableData[]> {
+    return of([
       {
-        nombre: 'Juan Perez',
+        nombres: 'Juan',
+        apellidoPaterno: 'Perez',
+        apellidoMaterno: 'Perez',
         curp: '1234567890',
         correo: 'juan.perez@gmail.com',
         telefono: '1234567890',
+        claveElector: '1234567890',
+        anioEmision: '2021',
+        anioRegistro: '2021',
+        numeroEmision: '1234567890',
+        cic: '1234567890',
+        firma: '1234567890',
+        ine: '1234567890',
         fecha_registro: '2021-01-01'
       },
       {
-        nombre: 'Maria Lopez',
+        nombres: 'Maria',
+        apellidoPaterno: 'Lopez',
+        apellidoMaterno: 'Lopez',
         curp: '1234567890',
         correo: 'maria.lopez@gmail.com',
         telefono: '1234567890',
+        claveElector: '1234567890',
+        anioEmision: '2021',
+        anioRegistro: '2021',
+        numeroEmision: '1234567890',
+        cic: '1234567890',
+        firma: '1234567890',
+        ine: '1234567890',
         fecha_registro: '2021-01-01'
       },
       {
-        nombre: 'Pedro Garcia',
+        nombres: 'Pedro',
+        apellidoPaterno: 'Garcia',
+        apellidoMaterno: 'Garcia',
         curp: '1234567890',
         correo: 'pedro.garcia@gmail.com',
         telefono: '1234567890',
+        claveElector: '1234567890',
+        anioEmision: '2021',
+        anioRegistro: '2021',
+        numeroEmision: '1234567890',
+        cic: '1234567890',
+        firma: '1234567890',
+        ine: '1234567890',
         fecha_registro: '2021-01-01'
       }
-    ];
+    ]);
   }
 }

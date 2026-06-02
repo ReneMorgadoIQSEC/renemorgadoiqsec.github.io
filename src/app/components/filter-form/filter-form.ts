@@ -1,10 +1,11 @@
 import { Component, Output, EventEmitter, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IFilterForm } from '../../interfaces/ITable';
+import { InputComponent } from '../input/input';
 
 @Component({
   selector: 'app-filter-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputComponent],
   templateUrl: './filter-form.html',
 })
 export class FilterForm {

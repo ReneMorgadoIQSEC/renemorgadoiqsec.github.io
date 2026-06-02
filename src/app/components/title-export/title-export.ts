@@ -16,10 +16,12 @@ export class TitleExport {
   }
 
   exportCSV() {
+    this.showExportMenu.set(false);
     console.log('exportCSV');
   }
 
   exportXLSX() {
+    this.showExportMenu.set(false);
     console.log('exportXLSX');
   }
 

@@ -3,7 +3,7 @@
         <p class="TitleExport__title-text">Registro de usuarios</p>
         <p class="TitleExport__title-description">Mostrando {{ data().length }} de {{ data().length }} resultados</p>
     </div>
-    <button class="button button--link" (click)="toggleExportMenu()">
+    <button [disabled]="data().length === 0" class="button button--link" (click)="toggleExportMenu()">
         Exportar
         <img [style.transform]="showExportMenu() ? 'rotate(180deg)' : 'rotate(0deg)'" src="assets/arrow-down.svg" alt="download" class="icon">
     </button>

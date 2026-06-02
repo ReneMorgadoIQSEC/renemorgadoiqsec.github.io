@@ -1,0 +1,37 @@
+@if (alreadySearched()) {
+    @if (data().length > 0) {
+        <table class="Table">
+            <thead class="Table__header">
+                <tr>
+                    <th class="Table__header-th">Nombre</th>
+                    <th class="Table__header-th">CURP</th>
+                    <th class="Table__header-th">Correo electrónico</th>
+                    <th class="Table__header-th">Número celular</th>
+                    <th class="Table__header-th">Fecha Registro</th>
+                </tr>
+            </thead>
+            <tbody class="Table__body">
+                @for (item of data(); track item) {
+                    <tr (click)="onDataSelected.emit(item)" class="Table__body-tr">
+                        <td class="Table__body-td">{{ item.nombres }} {{ item.apellidoPaterno }} {{ item.apellidoMaterno }}</td>
+                        <td class="Table__body-td">{{ item.curp }}</td>
+                        <td class="Table__body-td">{{ item.correo }}</td>
+                        <td class="Table__body-td">{{ item.telefono }}</td>
+                        <td class="Table__body-td">{{ item.fecha_registro }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @else {
+        <div class="Table__advise">
+            <img src="assets/empty.svg" alt="No results" class="Table__advise-image">
+            <p class="Table__advise-text">No se encontraron resultados</p>
+        </div>
+    }
+} @else {
+    <div class="Table__advise">
+        <img src="assets/no-search.svg" alt="No search" class="Table__advise-image">
+        <p class="Table__advise-text">Escribe una búsqueda, selecciona una fecha o <span class="Table__advise-text-bold" (click)="onSearchAllData()">carga todos los registros</span> disponibles para visualizar la información.</p>
+    </div>
+}

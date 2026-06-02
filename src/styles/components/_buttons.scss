@@ -24,14 +24,14 @@ button {
             color: map-get($values, color_disabled);
             border: 1px solid map-get($values, border_disabled);
             pointer-events: none;
+            & .icon {
+                filter: grayscale(100%) invert(1);
+            }
         }
         & .icon {
             width: 24px;
             height: 24px;
             transition: transform 0.3s ease-in-out;
-            &:disabled {
-                opacity: 0.5;
-            }
         }
     }
 }

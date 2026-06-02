@@ -22,6 +22,22 @@
     &__inputs {
         display: flex;
         gap: $spacing_sm;
+        flex-direction: column;
+        & > app-input {
+            width: 100%;
+            &:first-child {
+                flex: 1;
+            }
+            &:nth-child(2) {
+                flex: 1;
+            }
+            &:last-child {
+                flex: 1;
+            }
+        }
+        @include media('>tablet') {
+            flex-direction: row;
+        }
     }
     &__buttons {
         display: flex;
