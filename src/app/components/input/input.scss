@@ -1,0 +1,93 @@
+@use "../../../styles/base/root.scss" as *;
+@use "../../../styles/base/variables.scss" as *;
+
+.custom-input{
+    &__login{
+        position: relative;
+        border: 1px solid rgb(0, 0, 0, (.1));
+        border-radius: $spacing_3xs;
+        height: $spacing_8xl;
+        background-color: $color_white;
+        &__label{
+            position: absolute;
+            left: $spacing_2xs;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            transition: all 0.18s ease;
+            background-color: $color_white;
+            line-height: 1;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        &__field{
+            position: absolute;
+            left: $spacing_sm;
+            bottom: $spacing_2xs;
+            width: calc(100% - $spacing_8xl);
+            height: $spacing_4xl;
+            border: none;
+            padding: $spacing_3xs;
+            outline: transparent;
+            background: transparent;
+            opacity: 0;
+            font-size: 16px;
+            font-weight: 400;
+            transition: opacity 0.15s ease;
+            &:focus,
+            &:not(:placeholder-shown){
+                opacity: 1;
+            }
+            &:focus ~ .custom-input__login__label,
+            &:not(:placeholder-shown) ~ .custom-input__login__label{
+                top: 0;
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+        &__toggle{
+            position: absolute;
+            right: $spacing_3xs;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: $color_black;
+            display: flex;
+            align-items: center;
+            padding: $spacing_2xs;
+            transition: color 0.2s ease;
+            &__icon{
+                width: $spacing_lg;
+                height: $spacing_lg;
+                flex-shrink: 0;
+            }
+        }
+    }
+    &__filter{
+        display: flex;
+        align-items: center;
+        gap: $spacing_xs;
+        border: 1px solid rgb(0, 0, 0, (.1));
+        border-radius: $spacing_2xs;
+        padding: $spacing_3xs $spacing_2xs;
+        gap: $spacing_2xs;
+        height: $spacing_3xl;
+        background-color: $color_white;
+        &__icon{
+            width: $spacing_xs;
+            height: $spacing_xs;
+            flex-shrink: 0;
+        }
+        &__field{
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 100%;
+            height: $spacing_3xl;
+            font-size: $spacing_sm;
+            color: $color_gray_500;
+        }
+    }
+}

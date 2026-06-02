@@ -1,0 +1,53 @@
+<div *ngIf="variant === 'login'" class="custom-input__login">
+    <input
+    class="custom-input__login__field"
+      [type]="inputType"
+      [id]="inputId"
+      placeholder=" "
+      [value]="value"
+      [disabled]="isDisabled"
+      [appRestrictInput]="regex ?? ''"
+      [maxLength]="maxLength ?? 0"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    />
+    <label
+      [for]="inputId"
+      class="custom-input__login__label"
+    >
+      {{ label }}
+    </label>
+    <span class="custom-input__login__toggle">
+      <img 
+        [src]="showPassword ? 'assets/eye.svg' : 'assets/eye-off.svg'"
+        alt="Eye"
+        aria-hidden="true"
+        *ngIf="type === 'password'"
+        type="button"
+        class="custom-input__login__toggle__icon"
+        (click)="togglePassword()"
+        [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+      />
+    </span>
+</div>
+
+<div *ngIf="variant === 'filter'" class="custom-input__filter">
+    <img
+      *ngIf="icon"
+      class="custom-input__icon"
+      [src]="icon"
+      alt="Icon"
+      aria-hidden="true"
+    />
+    <input
+    class="custom-input__filter__field"
+    [type]="inputType"
+    [placeholder]="placeholder ?? ''"
+    [value]="value"
+    [disabled]="isDisabled"
+    [appRestrictInput]="regex ?? ''"
+    [maxLength]="maxLength ?? 0"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    />
+</div>
