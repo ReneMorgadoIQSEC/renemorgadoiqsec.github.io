@@ -1,0 +1,40 @@
+.TitleExport {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    &__title {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing_3xs;
+        &-text {
+            @include typography(H);
+            color: $color_black;
+        }
+        &-description {
+            @include typography(regular_b1);
+            color: $color_black;
+        }
+    }
+    &__exportMenu {
+        position: absolute;
+        right: 8px;
+        top: 48px;
+        border: 1px solid $color_gray_10;
+        border-radius: $radius_s;
+        background-color: $color_white;
+        box-shadow: $shadow_1;
+        & .button {
+            border-bottom: 2px solid $color_gray_10;
+            border-radius: 0;
+            width: 100% !important;
+            min-width: 100px;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+    & .button {
+        width: fit-content;
+    }
+}

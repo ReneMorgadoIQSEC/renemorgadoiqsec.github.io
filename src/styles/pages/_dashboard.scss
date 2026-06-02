@@ -1,0 +1,18 @@
+.Dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing_2xl;
+    background-color: $color_white_50;
+    &__content {
+        width: 100%;
+        border: 1px solid $color_gray_10;
+        box-shadow: $shadow_1;
+        border-radius: $radius_s;
+        padding: $spacing_lg $spacing_sm;
+        background-color: $color_white;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing_lg;
+    }
+}

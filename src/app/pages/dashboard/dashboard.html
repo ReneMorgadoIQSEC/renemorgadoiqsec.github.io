@@ -1,1 +1,7 @@
-<button (click)="onButtonClick()">Logout</button>
+<app-header></app-header>
+<main class="Dashboard">
+    <section class="Dashboard__content">
+        <app-title-export [data]="tableData"></app-title-export>
+        <app-filter-form (onFilterSearch)="onFilterSearch($event)"></app-filter-form>
+    </section>
+</main>

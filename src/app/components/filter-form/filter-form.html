@@ -1,0 +1,12 @@
+<form class="FilterForm" [formGroup]="filterForm" (ngSubmit)="onFilterSearchEmit()">
+    <div class="FilterForm__title">
+        <img src="assets/filter.svg" alt="filter" class="FilterForm__title-icon">
+        <p class="FilterForm__title-text">Filtros</p>
+    </div>
+    <div class="FilterForm__inputs">
+
+    </div>
+    <div class="FilterForm__buttons">
+        <button [disabled]="!allowButtonSearch()" type="submit" class="button button--primary">Buscar</button>
+    </div>
+</form>

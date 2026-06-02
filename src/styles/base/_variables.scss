@@ -12,6 +12,8 @@ $color_gray_700: var(--color_gray_700);
 $color_gray_500: var(--color_gray_500);
 $color_white_50: var(--color_white_50);
 $color_gray_20: var(--color_gray_20);
+$color_gray_10: var(--color_gray_10);
+$color_black_5: var(--color_black_5);
 
 // Espaciado
 $spacing_3xs: var(--spacing_3xs);
@@ -48,6 +50,8 @@ $breakpoints: (
 );
 
 $font-family: 'Noto Sans';
+
+$shadow_1: 0px 1px 4px 0px $color_black_5 ;
 
 $typography: (   
   H: (

@@ -1,0 +1,46 @@
+.header {
+    padding: $spacing_md $spacing_lg;
+    border-bottom: 1px solid $color_gray_10;
+    box-shadow: $shadow_1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__logo {
+        width: 150px;
+    }
+    &__user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing_2xs;
+        background-color: transparent;
+        border: none;
+        &-name {
+            @include typography(medium_b1);
+        }
+        &-initials {
+            @include typography(bold_b1);
+            color: $color_white;
+            background-color: $color_wine_800;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &-arrow {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease-in-out;
+        }
+    }
+    &__actions {
+        position: absolute;
+        right: $spacing_sm;
+        top: 64px;
+        border: 1px solid $color_gray_10;
+        background-color: $color_white;
+        border-radius: $radius_2xs;
+    }
+}

@@ -9,13 +9,14 @@ button {
         border: 1px solid map-get($values, border);
         padding: $spacing_sm ;
         min-width: fit-content;
+        max-width: 214px;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: $spacing_2xs;
         border-radius: $radius_s;
-        @include typography(medium_b1);
+        @include typography(bold_b1);
         text-transform: uppercase;
         text-decoration: none;
         &:disabled {
@@ -27,6 +28,7 @@ button {
         & .icon {
             width: 24px;
             height: 24px;
+            transition: transform 0.3s ease-in-out;
             &:disabled {
                 opacity: 0.5;
             }

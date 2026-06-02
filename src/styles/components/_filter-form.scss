@@ -1,0 +1,31 @@
+.FilterForm {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing_sm;
+    padding: $spacing_sm;
+    border-radius: $radius_2xs;
+    background-color: $color_white_50;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: $spacing_2xs;
+        &-icon {
+            width: 24px;
+            height: 24px;
+        }
+        &-text {
+            @include typography(extrabold_b1);
+            color: $color_black;
+        }
+    }
+    &__inputs {
+        display: flex;
+        gap: $spacing_sm;
+    }
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: $spacing_sm;
+    }
+}

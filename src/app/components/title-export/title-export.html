@@ -1,0 +1,20 @@
+<div class="TitleExport">
+    <div class="TitleExport__title">
+        <p class="TitleExport__title-text">Registro de usuarios</p>
+        <p class="TitleExport__title-description">Mostrando {{ data().length }} de {{ data().length }} resultados</p>
+    </div>
+    <button class="button button--link" (click)="toggleExportMenu()">
+        Exportar
+        <img [style.transform]="showExportMenu() ? 'rotate(180deg)' : 'rotate(0deg)'" src="assets/arrow-down.svg" alt="download" class="icon">
+    </button>
+    @if (showExportMenu()) {
+        <div class="TitleExport__exportMenu" >
+            <button class="button button--link" (click)="exportCSV()">
+                CSV
+            </button>
+            <button class="button button--link" (click)="exportXLSX()">
+                XLSX
+            </button>
+        </div>
+    }
+</div>

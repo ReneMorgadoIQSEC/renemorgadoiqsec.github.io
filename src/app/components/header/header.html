@@ -1,0 +1,16 @@
+<header class="header">
+    <img src="assets/logo.svg" alt="logo" class="header__logo">
+    <button class="header__user" (click)="onToggleActions()" type="button">
+        <p class="header__user-name">{{ userName }}</p>
+        <p class="header__user-initials">{{ getLogoInitials() }}</p>
+        <img [style.transform]="toggleActions() ? 'rotate(180deg)' : 'rotate(0deg)'" src="assets/arrow-down.svg" alt="arrow-down" class="header__user-arrow">
+    </button>
+    @if (toggleActions()) {
+        <div class="header__actions">
+            <button class="button button--link" (click)="onLogout()" type="button">
+                <img src="assets/exit.svg" alt="exit" class="button__icon">
+                Cerrar sesión
+            </button>
+        </div>
+    }
+</header>

@@ -1,5 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { GetTokenResponse } from '../interfaces/Iauth';
+import { TableData } from '../interfaces/ITable';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,31 @@ export class ConocerGeneralService {
     } catch (error) {
       return null;
     }
+  }
+
+  getTableData(): TableData[] {
+    return [
+      {
+        nombre: 'Juan Perez',
+        curp: '1234567890',
+        correo: 'juan.perez@gmail.com',
+        telefono: '1234567890',
+        fecha_registro: '2021-01-01'
+      },
+      {
+        nombre: 'Maria Lopez',
+        curp: '1234567890',
+        correo: 'maria.lopez@gmail.com',
+        telefono: '1234567890',
+        fecha_registro: '2021-01-01'
+      },
+      {
+        nombre: 'Pedro Garcia',
+        curp: '1234567890',
+        correo: 'pedro.garcia@gmail.com',
+        telefono: '1234567890',
+        fecha_registro: '2021-01-01'
+      }
+    ];
   }
 }
