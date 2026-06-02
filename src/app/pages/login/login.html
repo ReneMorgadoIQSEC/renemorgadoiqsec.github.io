@@ -1,5 +1,12 @@
 <section class="login">
     <div class="login__content">
-        <button class="button button--primary" (click)="onButtonClick()">Login</button>
+        <button class="button button--primary" (click)="onButtonClick()">Primary</button>
+        <button class="button button--secondary" (click)="onButtonClick()">Secondary</button>
+        <button class="button button--primary" disabled>Primary disabled</button>
+        <button class="button button--secondary" disabled>Secondary disabled</button>
+        <button class="button button--link" (click)="onButtonClick()">Link</button>
+        <button class="button button--link" disabled>Link disabled</button>
+        <a href="#" class="button button--link">Link</a>
+        <a href="#" class="button button--link" disabled>Link disabled</a>
     </div>
 </section>

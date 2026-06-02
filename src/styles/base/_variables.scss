@@ -11,6 +11,7 @@ $color_cream_100: var(--color_cream_100);
 $color_gray_700: var(--color_gray_700);
 $color_gray_500: var(--color_gray_500);
 $color_white_50: var(--color_white_50);
+$color_gray_20: var(--color_gray_20);
 
 // Espaciado
 $spacing_3xs: var(--spacing_3xs);
@@ -130,3 +131,30 @@ $typography: (
     line-height: 10px,
   ),
 ); 
+
+$buttons: (
+  primary: (
+    background: $color_wine_800,
+    color: $color_white,
+    border: $color_wine_800,
+    background_disabled: $color_gray_500,
+    color_disabled: $color_gray_700,
+    border_disabled: $color_gray_500,
+  ),
+  secondary: (
+    background: $color_white,
+    color: $color_wine_800,
+    border: $color_wine_800,
+    background_disabled: $color_white,
+    color_disabled: $color_gray_700,
+    border_disabled: $color_gray_700,
+  ),
+  link: (
+    background: transparent,
+    color: $color_wine_800,
+    border: transparent,
+    background_disabled: transparent,
+    color_disabled: $color_gray_20,
+    border_disabled: transparent,
+  ),
+);
