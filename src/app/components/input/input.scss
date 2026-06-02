@@ -7,6 +7,7 @@
         border: 1px solid rgb(0, 0, 0, (.1));
         border-radius: $spacing_3xs;
         height: $spacing_8xl;
+        margin-bottom: $spacing_2xs;
         background-color: $color_white;
         &__label{
             position: absolute;
@@ -69,6 +70,7 @@
         display: flex;
         align-items: center;
         gap: $spacing_xs;
+        margin-bottom: $spacing_2xs;
         border: 1px solid rgb(0, 0, 0, (.1));
         border-radius: $spacing_2xs;
         padding: $spacing_3xs $spacing_2xs;
