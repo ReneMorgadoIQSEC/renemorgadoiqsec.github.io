@@ -10,9 +10,16 @@
     background-position: center;
     background-repeat: no-repeat;
     &__content {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing_2xl;
         background-color: $color_white;
         border-radius: $radius_s;
         padding: $spacing_8xl;
         width: 500px;
+        & .button {
+            max-width: 100%;
+            margin-top: $spacing_sm;
+        }
     }
 }
