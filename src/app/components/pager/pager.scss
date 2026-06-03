@@ -1,0 +1,72 @@
+@use "../../../styles/base/root.scss" as *;
+@use "../../../styles/base/variables.scss" as *;
+
+.pager{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $spacing_lg $spacing_sm;
+    &__info{
+        font-size: $spacing_sm;
+        color: $color_black;
+    }
+    &__controls{
+        display: flex;
+        align-items: center;
+        gap: $spacing_2xs;
+    }
+    &__dots{
+        font-size: 14px;
+        color: $color_gray_300;
+        padding: 0 $spacing_2xs;
+    }
+    &__btn{
+        display: flex;
+        align-items: center;
+        gap: $spacing_3xs;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: $color_wine_800;
+        padding: $spacing_3xs $spacing_2xs;
+        border-radius: $spacing_3xs;
+        transition: color 0.2s ease;
+        &__nav{
+            font-weight: 600;
+            color: $color_wine_800;
+            opacity: 0.4;
+            &:not([disabled]){
+                opacity: 1;
+                cursor: pointer;
+                &:hover{
+                    opacity: 0.7;
+                }
+            }
+            &[disabled]{
+                cursor: default;
+                color: $color_gray_300;
+                img{
+                    filter: grayscale(1) opacity(0.2);
+                }
+            }
+            img{
+                width: $spacing_sm;
+                height: $spacing_sm;
+            }
+        }
+        &__number{
+            min-width: $spacing_lg;
+            justify-content: center;
+            color: $color_gray_300;
+            &:hover{
+                color: $color_wine_800;
+            }
+        }
+        &__active{
+            font-weight: 700;
+            color: $color_wine_800 !important;
+        }
+    }
+}

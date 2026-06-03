@@ -7,10 +7,11 @@ import { TitleExport } from '../../components/title-export/title-export';
 import { FilterForm } from '../../components/filter-form/filter-form';
 import { Table } from '../../components/table/table';
 import { UserDetail } from '../../components/user-detail/user-detail';
+import { Pager } from '../../components/pager/pager';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Header, TitleExport, FilterForm, Table, UserDetail],
+  imports: [Header, TitleExport, FilterForm, Table, UserDetail, Pager],
   templateUrl: './dashboard.html'
 })
 export class Dashboard {
@@ -19,6 +20,8 @@ export class Dashboard {
   alreadySearched = signal<boolean>(false);
   dataSelected = signal<TableData | undefined>(undefined);
   showModal = signal<boolean>(false);
+  currentPage = 1;
+  totalPages = 1;
 
   constructor(private readonly conocerGeneralService: ConocerGeneralService, private readonly router: Router) {
   }
@@ -52,5 +55,8 @@ export class Dashboard {
       this.tableData.set(data);
     });
   }
-
+  
+  onPageChange(page: number): void {
+    this.currentPage = page;
+  }
 }

@@ -1,1 +1,38 @@
-
+<div class="pager">
+    <span class="pager__info">
+        Página {{ currentPage }} de {{ totalPages}}
+    </span>
+    <div class="pager__controls">
+        <button
+        class="pager__btn pager__btn__nav"
+        [disabled]="!hasPrev"
+        (click)="goTo(currentPage - 1)"
+        > 
+            <img src="assets/arrow-left.svg" 
+            alt=""
+            aria-hidden="true"/>
+                ANTERIOR
+        </button>
+        <ng-container *ngFor="let page of pages">
+            <span *ngIf="page === '...'" class="pager__dots">...</span>
+            <button
+            *ngIf="page !== '...'"
+            class="pager__btn pager__btn__number"
+            [class.pager__btn__active]="page === currentPage"
+            (click)="goTo(+page)"
+            >
+                {{ page }}
+            </button>
+        </ng-container>
+        <button
+        class="pager__btn pager__btn__nav"
+        [disabled]="!hasNext"
+        (click)="goTo(currentPage + 1)"
+        >
+            SIGUIENTE
+            <img src="assets/arrow-right.svg"
+            alt=""
+            aria-hidden="true"/>
+        </button>
+    </div>
+</div>
