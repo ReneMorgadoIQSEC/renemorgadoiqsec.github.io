@@ -18,12 +18,14 @@
         width: 100%;
         max-width: 571px;
         padding: $spacing_lg;
-        border-radius: $radius_lg;
+        border-radius: $radius_m;
         border: 1px solid $color_gray_10;
         box-shadow: $shadow_1;
         display: flex;
         flex-direction: column;
         gap: $spacing_sm;
+        overflow-y: auto;
+        max-height: 80vh;
         &-header {
             display: flex;
             justify-content: space-between;
@@ -37,6 +39,98 @@
                 width: 24px;
                 height: 24px;
                 cursor: pointer;
+            }
+        }
+        &-body {
+            display: grid;
+            row-gap: $spacing_sm;
+            column-gap: $spacing_sm;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto;
+            grid-template-areas: 
+                "personal personal"
+                "contact contact"
+                "register register"
+                "signature ine";
+            &--personal {
+                grid-area: personal;
+            }
+            &--contact {
+                grid-area: contact;
+            }
+            &--register {
+                grid-area: register;
+            }
+            &--signature {
+                grid-area: signature;
+            }
+            &--ine {
+                grid-area: ine;
+            }
+        }
+        &-card {
+            background-color: $color_white;
+            border-radius: $radius_s;
+            gap: $spacing_sm;
+            padding: $spacing_sm;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid $color_gray_10;
+            &--header {
+                display: flex;
+                align-items: center;
+                gap: $spacing_2xs;
+                &-icon {
+                    width: 24px;
+                    height: 24px;
+                }
+                &-title {
+                    @include typography(bold_b1);
+                    color: $color_black;
+                }
+            }
+            &--content {
+                display: flex;
+                gap: $spacing_sm;
+                &-imageFull {
+                    width: 100%;
+                    height: 100%;
+                    max-height: 157px;
+                    object-fit: contain;
+                }
+                &-imageProfile {
+                    width: 100%;
+                    max-width: 86px;
+                    border-radius: $radius_s;
+                }
+                &-table {
+                    width: 100%;
+                    border-spacing: 0;
+                    border-collapse: collapse;
+                    tr {
+                        th, td {
+                            padding: 0;
+                            padding-bottom: $spacing_3xs;
+                        }
+                        th {
+                            @include typography(bold_SD);
+                            color: $color_black;
+                            text-align: left;
+                            text-transform: uppercase;
+                        }
+                        td {
+                            @include typography(regular_b1);
+                            color: $color_black;
+                            text-align: left;
+                        }
+                        &.extra-space {
+                            th, td {
+                                padding: 0;
+                                padding-bottom: $spacing_sm;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

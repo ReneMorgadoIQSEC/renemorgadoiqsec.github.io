@@ -4,5 +4,104 @@
             <p class="UserDetail__content-header-title">Detalle del usuario</p>
             <img (click)="closeModal()" src="assets/close.svg" alt="close" class="UserDetail__content-header-icon">
         </div>
+        <div class="UserDetail__content-body">
+            <div class="UserDetail__content-card UserDetail__content-body--personal">
+                <div class="UserDetail__content-card--header">
+                    <img src="assets/personal.svg" alt="personal" class="UserDetail__content-card--header-icon">
+                    <p class="UserDetail__content-card--header-title">Información personal</p>
+                </div>
+                <div class="UserDetail__content-card--content">
+                    <img src="assets/profile.png" alt="image-full" class="UserDetail__content-card--content-imageProfile">
+                    <table class="UserDetail__content-card--content-table">
+                        <tr>
+                            <th>Nombre (s)</th>
+                            <th>APELLIDO PATERNO</th>
+                        </tr>
+                        <tr class="extra-space">
+                            <td>{{ userSelected()?.nombres }}</td>
+                            <td>{{ userSelected()?.apellidoPaterno }}</td>
+                        </tr>
+                        <tr>
+                            <th>APELLIDO MATERNO</th>
+                            <th>CURP</th>
+                        </tr>
+                        <tr>
+                            <td>{{ userSelected()?.apellidoMaterno }}</td>
+                            <td>{{ userSelected()?.curp }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="UserDetail__content-card UserDetail__content-body--contact">
+                <div class="UserDetail__content-card--header">
+                    <img src="assets/contact.svg" alt="contact" class="UserDetail__content-card--header-icon">
+                    <p class="UserDetail__content-card--header-title">Datos de contacto</p>
+                </div>
+                <div class="UserDetail__content-card--content">
+                    <table class="UserDetail__content-card--content-table">
+                        <tr>
+                            <th>CORREO ELECTRÓNICO</th>
+                            <th>NÚMERO CELULAR</th>
+                        </tr>
+                        <tr>
+                            <td>{{ userSelected()?.correo }}</td>
+                            <td>{{ userSelected()?.telefono }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="UserDetail__content-card UserDetail__content-body--register">
+                <div class="UserDetail__content-card--header">
+                    <img src="assets/register.svg" alt="register" class="UserDetail__content-card--header-icon">
+                    <p class="UserDetail__content-card--header-title">Registro</p>
+                </div>
+                <div class="UserDetail__content-card--content">
+                    <table class="UserDetail__content-card--content-table">
+                        <tr>
+                            <th>CLAVE DE ELECTOR</th>
+                            <th>AÑO DE EMISIÓN</th>
+                        </tr>
+                        <tr class="extra-space">
+                            <td>{{ userSelected()?.claveElector }}</td>
+                            <td>{{ userSelected()?.anioEmision }}</td>
+                        </tr>
+                        <tr>
+                            <th>AÑO DE REGISTRO</th>
+                            <th>NÚMERO DE EMISIÓN</th>
+                        </tr>
+                        <tr class="extra-space">
+                            <td>{{ userSelected()?.anioRegistro }}</td>
+                            <td>{{ userSelected()?.numeroEmision }}</td>
+                        </tr>
+                        <tr>
+                            <th>CIC</th>
+                            <th>FECHA DE REGISTRO</th>
+                        </tr>
+                        <tr>
+                            <td>{{ userSelected()?.cic }}</td>
+                            <td>{{ userSelected()?.fecha_registro }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="UserDetail__content-card UserDetail__content-body--signature">
+                <div class="UserDetail__content-card--header">
+                    <img src="assets/signature.svg" alt="signature" class="UserDetail__content-card--header-icon">
+                    <p class="UserDetail__content-card--header-title">Firma</p>
+                </div>
+                <div class="UserDetail__content-card--content">
+                    <img src="assets/signature.png" alt="signature" class="UserDetail__content-card--content-imageFull">
+                </div>
+            </div>
+            <div class="UserDetail__content-card UserDetail__content-body--ine">
+                <div class="UserDetail__content-card--header">
+                    <img src="assets/ine.svg" alt="ine" class="UserDetail__content-card--header-icon">
+                    <p class="UserDetail__content-card--header-title">INE</p>
+                </div>
+                <div class="UserDetail__content-card--content">
+                    <img src="assets/ine.png" alt="ine" class="UserDetail__content-card--content-imageFull">
+                </div>
+            </div>
+        </div>
     </div>
 </dialog>
