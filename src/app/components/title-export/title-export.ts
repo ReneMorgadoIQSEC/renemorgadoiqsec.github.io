@@ -1,5 +1,6 @@
-import { Component, Input, signal, Signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { TableData } from '../../interfaces/ITable';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-title-export',
@@ -7,8 +8,9 @@ import { TableData } from '../../interfaces/ITable';
   templateUrl: './title-export.html'
 })
 export class TitleExport {
-  @Input() data!: Signal<TableData[]>;
-  
+  @Input() data!: TableData[];
+  @Input() totalData!: TableData[];
+
   showExportMenu = signal<boolean>(false);
 
   toggleExportMenu() {
@@ -17,12 +19,24 @@ export class TitleExport {
 
   exportCSV() {
     this.showExportMenu.set(false);
-    console.log('exportCSV');
+    const worksheet = XLSX.utils.json_to_sheet(this.totalData);
+    const csv = XLSX.utils.sheet_to_csv(worksheet);
+    const blob = new Blob([`\uFEFF${csv}`], {
+      type: 'text/csv;charset=utf-8;'
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data-conocer-export.csv';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   exportXLSX() {
     this.showExportMenu.set(false);
-    console.log('exportXLSX');
+    const worksheet = XLSX.utils.json_to_sheet(this.totalData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos');
+    XLSX.writeFile(workbook, 'data-conocer-export.xlsx');
   }
-
 }

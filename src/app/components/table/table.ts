@@ -7,7 +7,7 @@ import { TableData } from '../../interfaces/ITable';
   templateUrl: './table.html',
 })
 export class Table {
-  @Input() data = signal<TableData[]>([]);
+  @Input() data: TableData[] = [];
   @Input() alreadySearched = signal<boolean>(false);
   @Output() onDataSelected = new EventEmitter<TableData>();
   @Output() searchAllData = new EventEmitter<void>();

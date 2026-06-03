@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { ConocerGeneralService } from '../../services/conocer-general-service';
 import { Router } from '@angular/router';
 import { Header } from '../../components/header/header';
@@ -20,8 +20,13 @@ export class Dashboard {
   alreadySearched = signal<boolean>(false);
   dataSelected = signal<TableData | undefined>(undefined);
   showModal = signal<boolean>(false);
-  currentPage = 1;
-  totalPages = 1;
+  currentPage = signal<number>(0);
+  maxPerPage = signal<number>(10);
+  paginatedData = computed<TableData[]>(() => this.tableData().slice(this.currentPage() * this.maxPerPage(), (this.currentPage() + 1) * this.maxPerPage()));
+
+  totalPages() {
+    return Math.ceil(this.tableData().length / this.maxPerPage());
+  }
 
   constructor(private readonly conocerGeneralService: ConocerGeneralService, private readonly router: Router) {
   }
@@ -55,8 +60,8 @@ export class Dashboard {
       this.tableData.set(data);
     });
   }
-  
+
   onPageChange(page: number): void {
-    this.currentPage = page;
+    this.currentPage.set(page - 1);
   }
 }
