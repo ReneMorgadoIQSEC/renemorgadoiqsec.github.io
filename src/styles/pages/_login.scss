@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-image: url('/assets/bg.svg');
     background-size: cover;
     background-position: center;
@@ -12,14 +12,37 @@
     &__content {
         display: flex;
         flex-direction: column;
-        gap: $spacing_2xl;
         background-color: $color_white;
         border-radius: $radius_s;
-        padding: $spacing_8xl;
-        width: 500px;
+        padding: $spacing_7xl;
+        width: 450px;
         & .button {
             max-width: 100%;
             margin-top: $spacing_sm;
+        }
+        &__logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: $spacing_3xs 0 $spacing_7xl 0;
+        }
+        &__header{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: $spacing_3xs;
+            &__title{
+                @include typography(H);
+                margin: 0 0 $spacing_sm 0;
+            }
+            &__subtitle{
+                @include typography(medium_b1);
+                text-align: center;
+            }
+        }
+        &__inputs{
+            gap: $spacing_2xs;
         }
     }
 }

@@ -1,21 +1,45 @@
 <section class="login">
-    <form class="login__content">
-        <app-input 
-        formControlName="email" 
-        variant="login" 
-        type="email" 
-        label="Usuario*" 
-        [regex]="'[a-zA-Z0-9@._\\-]'">
-        </app-input> 
-    
-        <app-input 
-        formControlName="password" 
-        variant="login" 
-        type="password" 
-        label="Contraseña*" 
-        [maxLength]="20">
-        </app-input>
-        
-        <button class="button button--primary" (click)="onButtonClick()">Login</button>
+    <form class="login__content"
+    [formGroup]="loginForm">
+        <div class="login__content__logo">
+            <img src="assets/logo.svg" alt="CONOCER">
+        </div>
+        <div class="login__content__header">
+            <span class="login__content__header__title">Iniciar Sesión</span>
+            <p class="login__content__header__subtitle">
+                Ingresa tu usuario y contraseña
+                <br>
+                para acceder a la plataforma
+            </p>
+        </div>
+        <div class="login__content__inputs">
+            <app-input 
+                formControlName="email" 
+                variant="login" 
+                type="email" 
+                label="Usuario*" 
+                [regex]="'[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}'"
+                [maxLength]="80"
+                [errorMessage]="emailError"
+                [hasError]="!!emailError">
+            </app-input> 
+            <app-input 
+                formControlName="password" 
+                variant="login" 
+                type="password" 
+                label="Contraseña*" 
+                [maxLength]="20"
+                [errorMessage]="passwordError"
+                [hasError]="!!passwordError">
+            </app-input>
+        </div>
+        <button 
+            type="button" 
+            class="button button--primary"
+            [disabled]="!allowButtonLogin()" 
+            (click)="onButtonClick()"
+        >
+            INICIAR SESIÓN
+        </button>
     </form>
 </section>

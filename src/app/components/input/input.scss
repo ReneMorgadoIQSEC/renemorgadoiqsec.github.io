@@ -1,5 +1,6 @@
 @use "../../../styles/base/root.scss" as *;
-@use "../../../styles/base/variables.scss" as *;
+@use "../../../styles/base/variables" as *;
+@use "../../../styles/base/mixins" as *;
 
 .custom-input{
     &__login{
@@ -7,7 +8,17 @@
         border: 1px solid rgb(0, 0, 0, (.1));
         border-radius: $spacing_3xs;
         height: $spacing_8xl;
+        margin-top: $spacing_2xl;
         background-color: $color_white;
+        &__error{
+            display: block;
+            color: $color_wine_600;
+            margin: $spacing_3xs $spacing_sm;
+            font-size: 14px;
+        }
+        &--error{
+            border: 1px solid $color_wine_600;
+        }
         &__label{
             position: absolute;
             left: $spacing_2xs;

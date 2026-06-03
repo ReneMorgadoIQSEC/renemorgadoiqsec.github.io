@@ -28,6 +28,8 @@ export class InputComponent implements ControlValueAccessor{
   @Input() regex?: string | RegExp;
   @Input() maxLength?: number;
   @Input() label?: string;
+  @Input() errorMessage?: string;
+  @Input() hasError: boolean = false;
 
   inputId = `input-${Math.random().toString(36).slice(2, 7)}`;
   showPassword = false;
