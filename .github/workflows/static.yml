@@ -1,14 +1,18 @@
-name: Deploy Angular to GitHub Pages
+name: Deploy portfolio
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -19,24 +23,46 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
 
+      # Build Angular
       - run: npm ci
+        working-directory: mesa-conocer
 
-      - run: npm run build -- --base-href=/
+      - run: npx ng build --base-href /mesa-conocer/
+        working-directory: mesa-conocer
 
-      - name: Add GitHub Pages SPA fallback
-        run: cp dist/mesa-conocer/browser/index.html dist/mesa-conocer/browser/404.html
+      - name: Add GitHub Pages SPA fallback only for mesa-conocer
+        run: cp mesa-conocer/dist/mesa-conocer/browser/index.html mesa-conocer/dist/mesa-conocer/browser/404.html
+
+      # Armar carpeta final
+      - run: |
+          mkdir public
+
+          # Portal principal
+          cp -r main-site/* public/
+
+          # App Angular
+          mkdir -p public/mesa-conocer
+          cp -r mesa-conocer/dist/*/browser/* public/mesa-conocer/ || cp -r mesa-conocer/dist/*/* public/mesa-conocer/
+
+          # App estática
+          mkdir -p public/ejemplo-asp
+          cp -r ejemplo-asp/* public/ejemplo-asp/
+
+          # Evita problemas con Jekyll
+          touch public/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/mesa-conocer/browser
+          path: public
 
   deploy:
-    environment:
-      name: github-pages
     runs-on: ubuntu-latest
     needs: build
+
+    environment:
+      name: github-pages
 
     steps:
       - uses: actions/deploy-pages@v4
