@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 stream: stream,
                 inputSize: 224,
                 scoreThreshold: 0.8,
-                modelsRoute: "/models",
+                modelsRoute: "ejemplo-asp/models",
                 referencia: "20250721-2",
                 entidad: "fielnet",
                 usuario: "usr_fielnet",
