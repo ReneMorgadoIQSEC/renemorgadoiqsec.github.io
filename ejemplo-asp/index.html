@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Antispoofing</title>
+  <link rel="stylesheet" href="main.min.css" />
+  <script src="sdk/web-antispoofing-sdk.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <section class="container">
+    <div id="circle" class="circle white-border"></div>
+    <div id="content" class="content">
+      <img id="logo" src="img/logo.svg" alt="logo" class="logo">
+      <button id="start" class="button">Iniciar</button>
+      <div id="video-container" class="video-container">
+        <video id="video" autoplay playsinline></video>
+        <img id="head_outline" src="img/head_outline.svg" alt="head_outline" class="head_outline">
+      </div>
+    </div>
+    <div style="display: none;" id="toast" class="toast">
+      
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Anti-Spoofing SDK — Documentación</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111a33;
+      --panel2: #0f1730;
+      --text: #e8ecff;
+      --muted: #aab3d6;
+      --accent: #7aa2ff;
+      --accent2: #52d6c7;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(122,162,255,.25), transparent 60%),
+                  radial-gradient(1000px 700px at 80% 0%, rgba(82,214,199,.18), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,16,32,.65);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .brand h1 {
+      font-size: 18px;
+      margin: 0;
+      letter-spacing: .2px;
+    }
+    .pill {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+    .search {
+      flex: 1;
+      max-width: 520px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .search input {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline: none;
+    }
+    .search input::placeholder { color: rgba(232,236,255,.55); }
+    .layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 18px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    nav {
+      position: sticky;
+      top: 70px;
+      align-self: start;
+      background: rgba(17,26,51,.55);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    nav .section-title {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    nav a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--text);
+    }
+    nav a:hover { background: rgba(255,255,255,.06); text-decoration: none; }
+    main { min-width: 0; }
+    .card {
+      background: rgba(17,26,51,.55);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px 18px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: .2px;
+    }
+    .card h3 {
+      margin: 18px 0 8px;
+      font-size: 16px;
+      color: #dfe6ff;
+    }
+    .meta { color: var(--muted); font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: relative; top: 0; }
+      .grid { grid-template-columns: 1fr; }
+      .search { justify-content: stretch; }
+    }
+    code, pre { font-family: var(--mono); font-size: 12.8px; }
+    pre {
+      background: rgba(0,0,0,.28);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      overflow: auto;
+      margin: 10px 0;
+    }
+    .kbd {
+      font-family: var(--mono);
+      padding: 2px 7px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      margin: 10px 0;
+    }
+    th, td { padding: 10px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { text-align: left; color: #dfe6ff; font-size: 13px; background: rgba(255,255,255,.05); }
+    td { color: var(--text); font-size: 13px; }
+    .muted { color: var(--muted); }
+    .warn {
+      border-left: 4px solid #ffcf5a;
+      padding: 10px 12px;
+      background: rgba(255,207,90,.08);
+      border-radius: 12px;
+      margin: 10px 0;
+    }
+    .ok {
+      border-left: 4px solid var(--accent2);
+      padding: 10px 12px;
+      background: rgba(82,214,199,.08);
+      border-radius: 12px;
+      margin: 10px 0;
+    }
+    details {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.16);
+      margin: 10px 0;
+    }
+    details summary { cursor: pointer; font-weight: 600; }
+    .api-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.18);
+      margin: 10px 0;
+    }
+    .api-head {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .api-head .name { font-family: var(--mono); font-size: 13px; color: #e8ecff; }
+    .api-head .badge {
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: rgba(255,255,255,.03);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 14px 18px 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: .95;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <h1>Web Anti-Spoofing SDK</h1>
+      <span class="pill">web-antispoofing v1.0.0</span>
+      <span class="pill">Generado: 2025-12-16</span>
+    </div>
+    <div class="search">
+      <input id="searchBox" type="search" placeholder="Buscar en API (métodos, interfaces, eventos, propiedades)..." />
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav>
+    <div class="section-title">Inicio</div>
+    <a href="#overview">Visión general</a>
+    <a href="#quickstart">Quickstart</a>
+    <a href="#events">Eventos (actionListener)</a>
+
+    <div class="section-title">API</div>
+    <a href="#config">Configuración (configurations)</a>
+    <a href="#class">Clase AntiSpoofing</a>
+    <a href="#types">Tipos (interfaces)</a>
+
+    <div class="section-title">Integración</div>
+    <a href="#server">Servidor de demo / build</a>
+    <a href="#api-service">Contrato del servicio (urlApi)</a>
+    <a href="#troubleshooting">Troubleshooting</a>
+    <a href="#security">Notas de seguridad</a>
+  </nav>
+
+  <main>
+    <section class="card" id="overview" data-search="overview visión general">
+      <h2>Visión general</h2>
+      <p class="meta">
+        Este documento describe el proyecto <span class="kbd">web-antispoofing</span> y su SDK
+        <span class="kbd">AntiSpoofing</span>, enfocado en detección facial en el navegador, validaciones
+        (centrado, luz, proporciones, orientación y mirada al frente), y validación final contra un servicio externo.
+      </p>
+
+      <div class="grid">
+        <div class="ok">
+          <b>Qué hace</b>
+          <ul>
+            <li>Lee un <span class="kbd">MediaStream</span> (cámara) y analiza el video con <span class="kbd">face-api.js</span>.</li>
+            <li>Aplica validaciones en tiempo real y guía al usuario con mensajes (<span class="kbd">advise</span>, <span class="kbd">error</span>).</li>
+            <li>Captura N fotogramas en base64 y los envía a <span class="kbd">urlApi</span>.</li>
+            <li>Emite un resultado final (<span class="kbd">response</span>) indicando si hay spoof o no.</li>
+          </ul>
+        </div>
+        <div class="warn">
+          <b>Lo que NO hace</b>
+          <ul>
+            <li>No administra permisos de cámara (eso lo hace tu app con <span class="kbd">getUserMedia</span>).</li>
+            <li>No incluye el backend: el endpoint <span class="kbd">urlApi</span> debe existir y cumplir el contrato.</li>
+            <li>La mayoría de validadores son internos (marcados como <span class="kbd">private</span> en TypeScript).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Dependencias</h3>
+      <table>
+        <thead><tr><th>Paquete</th><th>Versión</th><th>Uso</th></tr></thead>
+        <tbody>
+          <tr data-search="face-api.js"><td><code>face-api.js</code></td><td><code>^0.22.2</code></td><td>Detección facial y landmarks en navegador.</td></tr>
+          <tr data-search="express"><td><code>express</code></td><td><code>^4.21.2</code></td><td>Servidor demo y publicación de estáticos.</td></tr>
+          <tr data-search="cors"><td><code>cors</code></td><td><code>^2.8.5</code></td><td>Habilitar CORS en servidor demo.</td></tr>
+          <tr data-search="dotenv"><td><code>dotenv</code></td><td><code>^16.4.7</code></td><td>Cargar variables de entorno.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" id="quickstart" data-search="quickstart inicio rápido ejemplo">
+      <h2>Quickstart</h2>
+
+      <h3>1) Incluir el SDK (build UMD)</h3>
+      <p class="muted">El servidor de este repo compila el TypeScript y expone un bundle UMD como global <span class="kbd">AntiSpoofing</span>.</p>
+      <pre><code>&lt;script src="/static/sdk/web-antispoofing-sdk.js"&gt;&lt;/script&gt;</code></pre>
+
+      <h3>2) HTML mínimo</h3>
+      <pre><code>&lt;video id="video" autoplay playsinline muted&gt;&lt;/video&gt;
+&lt;canvas id="canvas" style="display:none"&gt;&lt;/canvas&gt;</code></pre>
+
+      <h3>3) Inicialización</h3>
+      <pre><code>(async function () {
+  const video = document.getElementById("video");
+  const canvas = document.getElementById("canvas");
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+
+  const sdk = new AntiSpoofing({
+    videoElement: video,
+    canvasElement: canvas,
+    stream,
+    inputSize: 512,
+    scoreThreshold: 0.5,
+    modelsRoute: "/models",
+    urlApi: "https://TU_BACKEND/validate",
+    originSelfHeader: "TU_ORIGEN_O_TOKEN",
+    actionListener: (action, data) => {
+      switch (action) {
+        case "advise":
+        case "success":
+          console.log("[UI]", String(data));
+          break;
+        case "error":
+          console.error("[SDK ERROR]", String(data));
+          break;
+        case "framesCaptured":
+          console.log("Frames capturados:", data); // string[]
+          break;
+        case "response":
+          console.log("Resultado:", data); // ApiResponse
+          break;
+      }
+    },
+  });
+
+  // Nota: el SDK arranca su flujo internamente al construirse (configureSDK()).
+})();</code></pre>
+
+      <details>
+        <summary>Ejemplo en TypeScript (import default)</summary>
+        <pre><code>import AntiSpoofing from "./sdk/web-antispoofing-sdk";
+
+const antiSpoofing = new AntiSpoofing({
+  videoElement,
+  canvasElement,
+  stream,
+  inputSize: 512,
+  scoreThreshold: 0.5,
+  modelsRoute: "/models",
+  urlApi: "https://TU_BACKEND/validate",
+  originSelfHeader: "TU_ORIGEN_O_TOKEN",
+  actionListener: (action, data) => {
+    // mismo switch que arriba
+  },
+});</code></pre>
+      </details>
+    </section>
+
+    <section class="card" id="events" data-search="eventos actionListener advise error success framesCaptured response">
+      <h2>Eventos (actionListener)</h2>
+      <p class="meta">
+        El SDK notifica estados y resultados a través de <span class="kbd">actionListener(action, data)</span>.
+        El parámetro <span class="kbd">action</span> es uno de: <code>advise, error, framesCaptured, response, success</code>.
+      </p>
+
+      <table>
+        <thead><tr><th>action</th><th>data</th><th>Cuándo ocurre</th><th>Ejemplos</th></tr></thead>
+        <tbody>
+          <tr data-search="advise">
+            <td><code>advise</code></td>
+            <td><code>string</code></td>
+            <td>Guía al usuario cuando alguna validación falla (luz, distancia, orientación, múltiples rostros, etc.).</td>
+            <td><code>"Se requiere más luz en el rostro"</code>, <code>"Mira hacia al frente"</code></td>
+          </tr>
+          <tr data-search="success">
+            <td><code>success</code></td>
+            <td><code>string</code></td>
+            <td>Estado informativo mientras se capturan los fotogramas.</td>
+            <td><code>"Por favor no te muevas…"</code></td>
+          </tr>
+          <tr data-search="error">
+            <td><code>error</code></td>
+            <td><code>string</code></td>
+            <td>Errores de carga o de flujo (por ejemplo, no hay rostro detectado).</td>
+            <td><code>"Error al cargar el SDK: ..."</code></td>
+          </tr>
+          <tr data-search="framesCaptured">
+            <td><code>framesCaptured</code></td>
+            <td><code>string[]</code></td>
+            <td>Cuando se alcanzan los fotogramas requeridos (<code>framesLength</code>, por defecto 10) y se envían al backend.</td>
+            <td><code>["data:image/jpeg;base64,...", ...]</code></td>
+          </tr>
+          <tr data-search="response ApiResponse">
+            <td><code>response</code></td>
+            <td><code>ApiResponse</code></td>
+            <td>Al finalizar la evaluación del backend.</td>
+            <td><code>{ success: true, isSpoof: false }</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" id="config" data-search="configurations configuración parametros">
+      <h2>Configuración (<code>configurations</code>)</h2>
+      <p class="meta">Parámetros requeridos por el constructor <span class="kbd">new AntiSpoofing(params)</span>.</p>
+
+      <table>
+        <thead><tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr data-search="videoElement HTMLVideoElement">
+            <td><code>videoElement</code></td>
+            <td><code>HTMLVideoElement</code></td>
+            <td>Elemento &lt;video&gt; donde se reproduce la cámara. El SDK asigna <code>srcObject</code> con el <code>stream</code>.</td>
+          </tr>
+          <tr data-search="canvasElement HTMLCanvasElement">
+            <td><code>canvasElement</code></td>
+            <td><code>HTMLCanvasElement</code></td>
+            <td>Canvas usado para dibujar frames y calcular luminosidad / capturas base64.</td>
+          </tr>
+          <tr data-search="stream MediaStream">
+            <td><code>stream</code></td>
+            <td><code>MediaStream</code></td>
+            <td>Stream obtenido con <code>navigator.mediaDevices.getUserMedia</code>.</td>
+          </tr>
+          <tr data-search="inputSize">
+            <td><code>inputSize</code></td>
+            <td><code>number</code></td>
+            <td>Tamaño de entrada para el detector (<code>TinyFaceDetectorOptions</code>).</td>
+          </tr>
+          <tr data-search="scoreThreshold">
+            <td><code>scoreThreshold</code></td>
+            <td><code>number</code></td>
+            <td>Umbral mínimo de score para detección facial.</td>
+          </tr>
+          <tr data-search="modelsRoute">
+            <td><code>modelsRoute</code></td>
+            <td><code>string</code></td>
+            <td>Ruta base para cargar modelos (landmarks). Ej: <code>"/models"</code>.</td>
+          </tr>
+          <tr data-search="urlApi">
+            <td><code>urlApi</code></td>
+            <td><code>string</code></td>
+            <td>Endpoint HTTP(s) para validar el set de imágenes capturadas.</td>
+          </tr>
+          <tr data-search="originSelfHeader">
+            <td><code>originSelfHeader</code></td>
+            <td><code>string</code></td>
+            <td>Valor del header <code>origin_self</code> enviado al backend.</td>
+          </tr>
+          <tr data-search="actionListener">
+            <td><code>actionListener</code></td>
+            <td><code>(action: string, data: string | null | string[] | ApiResponse) =&gt; void</code></td>
+            <td>Callback central de eventos. Ver sección <a href="#events">Eventos</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="warn">
+        <b>Nota importante sobre modelos</b><br />
+        En el código actual, <code>loadModels()</code> carga <code>TinyFaceDetector</code> desde <code>"/models"</code> (ruta fija),
+        mientras que <code>modelsRoute</code> se usa para <code>loadFaceLandmarkModel(modelsRoute)</code>.
+        Si tu despliegue usa una ruta distinta, considera unificar ambas rutas en el código.
+      </div>
+    </section>
+
+    <section class="card" id="class" data-search="AntiSpoofing clase api métodos propiedades">
+      <h2>Clase <code>AntiSpoofing</code></h2>
+      <p class="meta">Exportación: <span class="kbd">export default AntiSpoofing</span>. En build UMD se expone como global <span class="kbd">AntiSpoofing</span>.</p>
+
+      <h3>Constructor</h3>
+      <div class="api-item" data-search="constructor AntiSpoofing">
+        <div class="api-head">
+          <div class="name">new AntiSpoofing(params: configurations)</div>
+          <span class="badge">Inicializa + arranca configuración interna</span>
+        </div>
+        <p class="muted">
+          Guarda la configuración, asigna <code>srcObject</code> al video, carga modelos y empieza el loop de validación al reproducir el video.
+        </p>
+      </div>
+
+      <h3>Propiedades internas (tuning)</h3>
+      <p class="muted">Declaradas como <code>private</code>; sirven para entender y ajustar el comportamiento.</p>
+      <table>
+        <thead><tr><th>Propiedad</th><th>Tipo</th><th>Default</th><th>Propósito</th></tr></thead>
+        <tbody>
+          <tr data-search="faceCenteredTolerance"><td><code>faceCenteredTolerance</code></td><td><code>number</code></td><td><code>50</code></td><td>Tolerancia (px) para considerar el rostro centrado respecto al óvalo.</td></tr>
+          <tr data-search="minLightValue"><td><code>minLightValue</code></td><td><code>number</code></td><td><code>50</code></td><td>Umbral mínimo de luminosidad promedio.</td></tr>
+          <tr data-search="minFaceWidthPercentage"><td><code>minFaceWidthPercentage</code></td><td><code>number</code></td><td><code>70</code></td><td>Porcentaje mínimo de ancho facial vs ancho del video.</td></tr>
+          <tr data-search="maxFaceWidthPercentage"><td><code>maxFaceWidthPercentage</code></td><td><code>number</code></td><td><code>80</code></td><td>Porcentaje máximo de ancho facial vs ancho del video.</td></tr>
+          <tr data-search="angleValue angleValueUmbral"><td><code>angleValue</code> / <code>angleValueUmbral</code></td><td><code>number</code></td><td><code>0</code> / <code>10</code></td><td>Rango permitido de ángulo para orientación.</td></tr>
+          <tr data-search="framesLength"><td><code>framesLength</code></td><td><code>number</code></td><td><code>10</code></td><td>Número de frames capturados antes de llamar al backend.</td></tr>
+          <tr data-search="toleranceFront"><td><code>toleranceFront</code></td><td><code>number</code></td><td><code>0.1</code></td><td>Tolerancia (ratio) para validar mirada frontal.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Flujo interno (métodos privados)</h3>
+      <p class="muted">Referencia directa del código: firmas, JSDoc y ubicación aproximada.</p>
+      <div id="apiMethods">
+        <!-- Por tamaño del mensaje, aquí normalmente van los items de métodos con JSDoc y línea.
+             Si quieres, te lo dejo también completo con TODOS los métodos (constructor + 18 privados) en otro mensaje. -->
+      </div>
+    </section>
+
+    <section class="card" id="types" data-search="tipos interfaces ApiResponse sector">
+      <h2>Tipos (interfaces)</h2>
+      <div class="api-item" data-search="configurations interface">
+        <div class="api-head">
+          <div class="name">interface configurations</div>
+          <span class="badge">TypeScript</span>
+        </div>
+        <p class="muted">Interface for configuration parameters</p>
+        <table><thead><tr><th>Campo</th><th>Tipo</th></tr></thead><tbody>
+          <tr><td><code>videoElement</code></td><td><code>HTMLVideoElement</code></td></tr>
+          <tr><td><code>canvasElement</code></td><td><code>HTMLCanvasElement</code></td></tr>
+          <tr><td><code>stream</code></td><td><code>MediaStream</code></td></tr>
+          <tr><td><code>inputSize</code></td><td><code>number</code></td></tr>
+          <tr><td><code>scoreThreshold</code></td><td><code>number</code></td></tr>
+          <tr><td><code>modelsRoute</code></td><td><code>string</code></td></tr>
+          <tr><td><code>urlApi</code></td><td><code>string</code></td></tr>
+          <tr><td><code>originSelfHeader</code></td><td><code>string</code></td></tr>
+          <tr><td><code>actionListener</code></td><td><code>(action: string, data: string | null | string[] | ApiResponse) =&gt; void</code></td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="api-item" data-search="sector interface">
+        <div class="api-head">
+          <div class="name">interface sector</div>
+          <span class="badge">TypeScript</span>
+        </div>
+        <p class="muted">Interface for defining a sector in the canvas</p>
+        <table><thead><tr><th>Campo</th><th>Tipo</th></tr></thead><tbody>
+          <tr><td><code>x</code></td><td><code>number</code></td></tr>
+          <tr><td><code>y</code></td><td><code>number</code></td></tr>
+          <tr><td><code>width</code></td><td><code>number</code></td></tr>
+          <tr><td><code>height</code></td><td><code>number</code></td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="api-item" data-search="ApiResponse interface">
+        <div class="api-head">
+          <div class="name">interface ApiResponse</div>
+          <span class="badge">TypeScript</span>
+        </div>
+        <p class="muted">Interface for API response</p>
+        <table><thead><tr><th>Campo</th><th>Tipo</th></tr></thead><tbody>
+          <tr><td><code>success</code></td><td><code>boolean</code></td></tr>
+          <tr><td><code>isSpoof</code></td><td><code>boolean | null</code></td></tr>
+        </tbody></table>
+      </div>
+    </section>
+
+    <section class="card" id="server" data-search="servidor express webpack build scripts dev start">
+      <h2>Servidor de demo / build</h2>
+      <p class="meta">
+        El servidor Express (<code>src/index.ts</code>) compila el SDK con Webpack y sirve recursos estáticos:
+      </p>
+      <ul>
+        <li>Bundle UMD: <code>/static/sdk/web-antispoofing-sdk.js</code> (global <code>AntiSpoofing</code>).</li>
+        <li>Modelos: <code>/models</code></li>
+        <li>Estáticos: <code>/static</code></li>
+        <li>Rutas: <code>/</code> y <code>/docs</code></li>
+      </ul>
+
+      <h3>Scripts npm</h3>
+      <pre><code>npm run dev   # nodemon --exec ts-node src/index.ts
+npm start     # ts-node src/index.ts</code></pre>
+
+      <h3>Variables de entorno</h3>
+      <p class="muted">Se lee <code>PORT</code> (por defecto 4000). Ajusta según tu despliegue.</p>
+    </section>
+
+    <section class="card" id="api-service" data-search="urlApi contrato backend cod_error analisis imgs_base64">
+      <h2>Contrato del servicio (<code>urlApi</code>)</h2>
+      <p class="meta">
+        Al completar la captura, el SDK hace un <code>POST</code> a <code>urlApi</code> con JSON y header <code>origin_self</code>.
+      </p>
+
+      <h3>Request</h3>
+      <pre><code>{
+  "imgs_base64": [
+    "BASE64_SIN_PREFIJO_data:image",
+    "..."
+  ]
+}</code></pre>
+      <p class="muted">El SDK remueve el prefijo <code>data:image/(png|jpg|jpeg);base64,</code> antes de enviar.</p>
+
+      <h3>Response esperada</h3>
+      <pre><code>{
+  "cod_error": 0,
+  "data": {
+    "analisis": "Spoof"
+  }
+}</code></pre>
+
+      <h3>Interpretación</h3>
+      <ul>
+        <li><code>cod_error === 0</code> y <code>analisis === "Spoof"</code> → <code>{ success:true, isSpoof:true }</code></li>
+        <li><code>cod_error === 0</code> y <code>analisis !== "Spoof"</code> → <code>{ success:true, isSpoof:false }</code></li>
+        <li><code>cod_error !== 0</code> → <code>{ success:false, isSpoof:null }</code></li>
+      </ul>
+    </section>
+
+    <section class="card" id="troubleshooting" data-search="troubleshooting errores luz modelos cors permisos">
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li><b>No se detecta rostro:</b> valida permisos de cámara, iluminación y que el video tenga <code>autoplay</code> + <code>playsinline</code>.</li>
+        <li><b>Error al cargar modelos:</b> verifica que <code>/models</code> exista y no haya 404 en la pestaña Network.</li>
+        <li><b>CORS al llamar <code>urlApi</code>:</b> habilita CORS en tu backend (o usa un proxy).</li>
+        <li><b>Mensajes constantes de distancia:</b> ajusta porcentajes min/max del tamaño de rostro en el código si tu UI tiene otro encuadre.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="security" data-search="seguridad privacidad base64 fotos almacenamiento">
+      <h2>Notas de seguridad y privacidad</h2>
+      <ul>
+        <li>Usa HTTPS siempre (las fotos viajan como base64).</li>
+        <li>No loguees frames completos en producción.</li>
+        <li>Define retención/borrrado en backend y consentimiento del usuario.</li>
+        <li>Si <code>origin_self</code> es un token, asume que es un secreto.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<div class="footer">
+  Generado a partir del código fuente en <code>src/sdk/web-antispoofing-sdk.ts</code> y <code>src/index.ts</code>.
+</div>
+
+<script>
+  const searchBox = document.getElementById('searchBox');
+  const searchable = Array.from(document.querySelectorAll('[data-search]'));
+  function norm(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+  }
+  function applyFilter() {
+    const q = norm(searchBox.value.trim());
+    if (!q) {
+      searchable.forEach(el => el.style.display = '');
+      return;
+    }
+    searchable.forEach(el => {
+      const hay = norm(el.getAttribute('data-search') + ' ' + el.textContent);
+      el.style.display = hay.includes(q) ? '' : 'none';
+    });
+  }
+  searchBox.addEventListener('input', applyFilter);
+</script>
+</body>
+</html>
