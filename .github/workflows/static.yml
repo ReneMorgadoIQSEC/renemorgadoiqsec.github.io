@@ -33,7 +33,8 @@ jobs:
         working-directory: mesa-conocer
 
       - name: Add GitHub Pages SPA fallback only for mesa-conocer
-        run: cp mesa-conocer/dist/mesa-conocer/browser/index.html mesa-conocer/dist/mesa-conocer/browser/404.html
+        working-directory: mesa-conocer
+        run: cp dist/mesa-conocer/browser/index.html dist/mesa-conocer/browser/404.html
 
       # Armar carpeta final
       - run: |
